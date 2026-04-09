@@ -43,11 +43,11 @@ xmlhttp.status==200) {
   <h2>Patronus</h2>
   <p>${hahmo.patronus}</p>
 
+   <h2>Alive status</h2>
+  <p>${hahmo.alive ? "Yes" : "No"}</p>
+
   <h2>Actor</h2>
   <p>${hahmo.actor}</p>
-
-  <h2>Alive status</h2>
-  <p>${hahmo.alive ? "Yes" : "No"}</p>
 
   <div class="kortti-kuva">
   ${hahmo.image ? `<img src="${hahmo.image}" alt="${hahmo.name}">` : ""}
@@ -108,13 +108,13 @@ const tulokset = hahmot.filter(h => h.house && h.house.toLowerCase().includes(sa
 //Lisää tuvan nimi otsikoksi
     const houseName = tulokset[0].house;
     hakutulokset.innerHTML += `
-        <h2 class="house-title">${houseName}</h2>
+        <h2>${houseName}</h2>
         <hr>`;
 
 //Lisää hahmot listaan
   tulokset.forEach(h => {
     const div = document.createElement("div");
-    div.className = "house-item";
+    
 
     div.innerHTML = `
       <strong>${h.name}</strong><br>
