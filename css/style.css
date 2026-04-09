@@ -226,6 +226,7 @@ p {
         flex-direction: column;
         align-items: center;
     }
+
   .haku {
     width: 100%;
   }
@@ -237,8 +238,5 @@ p {
   
   .haku input[type="text"] {
     flex: 1;
-    
   }
-
-
 }
