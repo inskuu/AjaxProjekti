@@ -12,7 +12,7 @@ header {
   font-size: x-large;
   background-image: url("../kuvat/rohkelikko.jpg") ;
 text-align: center;
-padding: 70px; 
+padding: 50px; 
 }
 
 .tausta {
@@ -209,20 +209,36 @@ p {
     margin: 0;               
   }
 
-  #hahmokortti img {
+  #hahmoKortti {
+    text-align: center;
+  }
+
+  #hahmoKortti img {
     position: static;
     max-width: 100%;
     height: auto;
+    margin-top: 10px;
   }
   }
 
   @media (max-width: 768px) {
     .navigointi {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
   .haku {
     width: 100%;
   }
+  
+  .haku form {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .haku input[type="text"] {
+    flex: 1;
+    
+  }
+
 
 }
