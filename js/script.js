@@ -10,7 +10,10 @@ document.querySelectorAll(".valikonsisalto").forEach(valikko => {
   });
 });
 
-function haeHahmo(nimi) {
+let hahmot = [];
+
+//Lataa kaikki hahmot
+function lataaHahmot() {
 // Ajax pyynnön lähetys
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET","https://hp-api.onrender.com/api/characters",true);
@@ -21,9 +24,18 @@ xmlhttp.onreadystatechange=function() {
 if (xmlhttp.readyState==4 &&
 xmlhttp.status==200) {
 
-//Etsi oikea hahmo nimen perusteella ja näytä tiedot kortissa
-      const tiedot = JSON.parse(xmlhttp.responseText);
-      const hahmo = tiedot.find(h => h.name === nimi);
+    const tiedot = JSON.parse(xmlhttp.responseText);
+    hahmot = tiedot;
+    taytaValikot();
+}
+};
+}
+
+lataaHahmot();
+
+//Hae yksittäinen hahmo
+    function haeHahmo(nimi) {
+    const hahmo = hahmot.find(h => h.name === nimi);
     
       document.querySelector("#hahmoKortti").innerHTML = `
       <h1>${hahmo.name}</h1>
@@ -54,19 +66,8 @@ xmlhttp.status==200) {
   </div>
 `;
 }
-}
-}
 
 //Lisää kuvalliset hahmot oikeisiin alasvetovalikkoihin
-let hahmot = [];
-
-fetch("https://hp-api.onrender.com/api/characters")
-  .then(response => response.json())
-  .then(data => {
-    hahmot = data;
-    taytaValikot();
-  });
-
 function taytaValikot() {
     const opiskelijat = hahmot.filter(h => h.hogwartsStudent && h.image);
     const opettajat = hahmot.filter(h => h.hogwartsStaff  && h.image);
@@ -93,17 +94,12 @@ function taytaValikot() {
 }
 
 //Etsi hakukentästä tuvan nimellä tai sen osalla
-const hakukentta = document.querySelector("#hakukentta");
-const hakutulokset = document.querySelector("#hakuTulokset");
-const hakunappi =document.querySelector("#hakunappi")
-
-hakunappi.addEventListener("click", function() {
-const sana = hakukentta.value.trim().toLowerCase();
-
-const tulokset = hahmot.filter(h => h.house && h.house.toLowerCase().includes(sana));
+function haeTupa(tupa) {
+const tulokset = hahmot.filter(h => h.house && h.house.toLowerCase().includes(tupa));
 
  //Tyhjennä vanhat tulokset
-    hakutulokset.innerHTML = "";
+const hakutulokset = document.querySelector("#hakuTulokset");
+hakutulokset.innerHTML = "";
 
 //Lisää tuvan nimi otsikoksi
     const houseName = tulokset[0].house;
@@ -114,8 +110,6 @@ const tulokset = hahmot.filter(h => h.house && h.house.toLowerCase().includes(sa
 //Lisää hahmot listaan
   tulokset.forEach(h => {
     const div = document.createElement("div");
-    
-
     div.innerHTML = `
       <strong>${h.name}</strong><br>
        ${h.hogwartsStudent ? "Student" : h.hogwartsStaff ? "Teacher" : "Other"}<br>
@@ -124,6 +118,13 @@ const tulokset = hahmot.filter(h => h.house && h.house.toLowerCase().includes(sa
 
         hakutulokset.appendChild(div);
     });
+};
+
+//Hakunappi
+const hakunappi = document.querySelector("#hakunappi");
+const hakukentta = document.querySelector("#hakukentta");
+hakunappi.addEventListener("click", function() {
+const sana = hakukentta.value.trim().toLowerCase();
+haeTupa(sana);
+hakukentta.value ="";
 });
-
-
