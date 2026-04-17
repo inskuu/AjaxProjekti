@@ -9,7 +9,7 @@
 header {
   color: #aa7502;
   font-family: "Montez";
-  font-size: x-large;
+  font-size: 28px;
   background-image: url("../kuvat/tausta.png") ;
 text-align: center;
 padding: 50px; 
@@ -144,6 +144,7 @@ z-index: 999;
     border: 1px solid rgb(218, 218, 218);
     box-shadow: 0 4px 10px rgba(36, 56, 73, 0.4), 0 8px 24px rgba(36, 56, 73, 0.25);
     font-family: "Schoolbell", cursive;
+    font-size: 18px;
   }
 
    /* Korttien asettelut */
@@ -154,6 +155,7 @@ z-index: 999;
 .oikeakortti {
   flex: 1;
   margin-right: 20px;
+  align-items: center;
 }
 .keskimmainenkortti {
     flex: 0.5;
@@ -162,10 +164,15 @@ z-index: 999;
 flex: 1;
 margin-left: 20px;
 }
+
 hr {
    border: none;
    height: 3px;
-  background: linear-gradient(to right, #243849,#aa7502,#243849);
+  background: linear-gradient(to right, #0e1920, #243849,#9d4b06,#aa7502,#fdf087,#aa7502,#9d4b06,#243849, #0e1920);
+}
+
+.otsikko {
+    text-align: center;
 }
 
  /* Kuvan asetukset */
@@ -175,13 +182,21 @@ hr {
     width: auto;
   }
 
+  .alkukuva {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 10px auto 0; 
+  }
+  
+
   /* Hahmokortin asetukset */
 #hahmoKortti {
   position: relative;
   overflow: hidden; 
 }
  
-#hahmoKortti img {
+#hahmoKortti .hahmokuva {
   position: absolute;
   max-width: 300px;
   max-height: 800px;
@@ -190,15 +205,12 @@ hr {
   border-radius: 8px;
 }
 
-p {
-    font-size: 20px;
-}
 
   /* Hakutuloskortin asetukset */
 #hakuTulokset {
   max-height: 800px;   
-  overflow-y: auto;        
-  padding-right: 10px;    
+  overflow-y: auto;   
+  padding-right: 10px; 
 }
 
   /* Responsiivisuus */
@@ -228,10 +240,9 @@ p {
     text-align: center;
   }
 
-  p{
-    font-size: 14px;
+  p {
+    font-size: 18px;
   }
-
   h2 {
     font-size: 16px;
   }
@@ -239,7 +250,10 @@ p {
   h1 {
     font-size: 22px;
   }
-  }
+}
+
+
+  
 
   @media (max-width: 768px) {
     .navigointi {

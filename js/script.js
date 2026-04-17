@@ -14,7 +14,6 @@ const kaannokset = {
         "Ravenclaw": "Korpinkynsi",
         "": "Tuntematon"
     },
-
     patronus: {
         "stag": "Uroshirvi",
         "otter": "Saukko",
@@ -27,8 +26,10 @@ const kaannokset = {
         "wolf": "Susi",
         "persian cat": "Kissa",
         "weasel": "Kärppä",
+        "lynx": "Ilves",
+        "non-corporeal": "Aineeton",
         "": "Tuntematon"
-    },
+    }
 }
 
 
@@ -75,29 +76,29 @@ lataaHahmot();
       document.querySelector("#hahmoKortti").innerHTML = `
       <h1>${hahmo.name}</h1>
 <hr>
-     <h2>Muut nimet</h2>
-  <p>${hahmo.alternate_names.join(", ")}</p> 
+     <h3>Muut nimet</h3>
+  <p>${hahmo.alternate_names.join(", ") || "-"}</p> 
 
-  <h2>Syntymäaika</h2>
-  <p>${hahmo.dateOfBirth || "Tuntematon"}</p>
+  <h3>Syntymäaika</h3>
+  <p>${hahmo.dateOfBirth || "Ei tiedossa"}</p>
 
-<h2>Syntyperä</h2>
+<h3>Syntyperä</h3>
   <p>${kaannokset.ancestry[hahmo.ancestry]}</p>
 
-  <h2>Tupa</h2>
+  <h3>Tupa</h3>
   <p>${kaannokset.house[hahmo.house]}</p>
 
-  <h2>Suojelius</h2>
+  <h3>Suojelius</h3>
   <p>${kaannokset.patronus[hahmo.patronus]}</p>
 
-   <h2>Status</h2>
+   <h3>Status</h3>
   <p>${hahmo.alive ? "Elossa" : "Kuollut"}</p>
 
-  <h2>Näyttelijä</h2>
+  <h3>Näyttelijä</h3>
   <p>${hahmo.actor}</p>
 
   <div class="kortti-kuva">
-  ${hahmo.image ? `<img src="${hahmo.image}" alt="${hahmo.name}">` : ""}
+  ${hahmo.image ? `<img src="${hahmo.image}" alt="${hahmo.name}" class="hahmokuva">` : ""}
   </div>
 `;
 }
@@ -149,7 +150,7 @@ hakutulokset.innerHTML = "";
 //Lisää tuvan nimi otsikoksi
     const houseName = tulokset[0].house;
     hakutulokset.innerHTML += `
-        <h2>${kaannokset.house[houseName]}</h2>
+        <h1>${kaannokset.house[houseName]}</h1>
         <hr>`;
 
 //Lisää hahmot listaan
@@ -158,7 +159,6 @@ hakutulokset.innerHTML = "";
     div.innerHTML = `
       <strong>${h.name}</strong>
        ${h.hogwartsStudent ? "Oppilas" : h.hogwartsStaff ? "Opettaja" : "Muu"}<br><br>
-     
     `;
 
         hakutulokset.appendChild(div);
@@ -166,9 +166,10 @@ hakutulokset.innerHTML = "";
 };
 
 //Hakunappi hakee hahmot tuvan perusteella. Napin painaminen tyhjentää hakukentän.
-const hakunappi = document.querySelector("#hakunappi");
+const hakunappi = document.querySelector(".haku form");
 const hakukentta = document.querySelector("#hakukentta");
-hakunappi.addEventListener("click", function() {
+hakunappi.addEventListener("submit", function(e) {
+    e.preventDefault();
 const sana = hakukentta.value.trim().toLowerCase();
 haeTupa(sana);
 hakukentta.value ="";
