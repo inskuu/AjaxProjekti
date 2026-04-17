@@ -59,6 +59,7 @@ padding: 50px;
   font-size: 26px;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .valikonsisalto {
@@ -161,6 +162,11 @@ z-index: 999;
 flex: 1;
 margin-left: 20px;
 }
+hr {
+   border: none;
+   height: 3px;
+  background: linear-gradient(to right, #243849,#aa7502,#243849);
+}
 
  /* Kuvan asetukset */
   .kuva {
@@ -233,13 +239,6 @@ p {
   h1 {
     font-size: 22px;
   }
-
-  #hahmoKortti img {
-    position: static;
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-  }
   }
 
   @media (max-width: 768px) {
@@ -259,5 +258,13 @@ p {
   
   .haku input[type="text"] {
     flex: 1;
+  }
+}
+@media (max-width: 1600px) {
+  #hahmoKortti img {
+    position: static;
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
   }
 }

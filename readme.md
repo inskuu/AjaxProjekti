@@ -56,7 +56,7 @@ Sovellus toimii netlify linkin () kautta.
     -Hain täältä fontit, joita käytin.
 - [Copilot](https://copilot.microsoft.com/)
     -Tätä käytin aina, kun en saanut jotain toimimaan. Syötin koodia ja kysyin mikä vikana, kun koodi ei toimi, kuten olin sen ajatellut.
-    -Pyysin tekoäly luomaan minulle sopivan suurennuslasin kuvan, jota käytin. 
+    -Pyysin tekoäly luomaan minulle sopivan suurennuslasin kuvan sekä taustakuvan, joita käytin. 
 - [W3Schools](https://www.w3schools.com/) 
     -Täältä etsin tietoa aina ensimmäisten joukossa. Esim. navigointirivi, dropdown.
 - [Opettajan materiaali](https://mika-stenberg.gitbook.io/web-sovelluksia-javascriptin-avulla)

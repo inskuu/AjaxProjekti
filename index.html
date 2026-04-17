@@ -7,31 +7,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montez&family=Schoolbell&display=swap" rel="stylesheet">
-    <title>Harry Potter</title>
+    <title>Tervetuloa Tylypahkaan</title>
 </head>
 <body>
     <div class="kokosivu">
-    <header><h1>Hogwarts School of <br>Witchcraft and Wizardry</h1></header>
+    <header><h1>Tylypahkan noitien<br>ja velhojen koulu</h1></header>
     <div class ="tausta">
   
 <nav>
 <ul class="navigointi">
   <li class="dropdown">
-    <button class="alasvetovalikko">Students</button>
+    <button class="alasvetovalikko">Opiskelijat</button>
 
     <div class="valikonsisalto" id="opiskelijatLista">
 
     </div>
   </li>
   <li class="dropdown">
-    <button class="alasvetovalikko">Teachers</button>
+    <button class="alasvetovalikko">Opettajat</button>
 
     <div class="valikonsisalto" id="opettajatLista">
     </div>
   </li>
+  <li class="dropdown">
+    <button class="alasvetovalikko">Muut</button>
+
+    <div class="valikonsisalto" id="muutLista">
+    </div>
+  </li>
   <li class="haku">
         <form>
-    <input type="text" placeholder="Search by housename" id="hakukentta">
+    <input type="text" placeholder="Hae tuvan nimellä" id="hakukentta">
     <button type="button" id="hakunappi"></button>
 </form>
 </li>
@@ -42,19 +48,19 @@
 
              <div class="vasenkortti">
 <div class="kortti" id="hahmoKortti">
-    <h2>Choose a character</h2>
+    <h2>Valitse hahmo</h2>
 </div>
     </div>  
 
 <div class="keskimmainenkortti">
           <div id="hakuTulokset" class="kortti">
-            <h3>Search by house to reveal its members</h3>
+            <h3>Hae tuvan nimellä paljastaaksesi sen jäsenet</h3>
           </div>
         </div>
   
         <div class="oikeakortti">
           <div class="kortti">
-            <h1>Hogwarts</h1>
+            <h1>Tylypahkan linna</h1>
               <img src="kuvat/hogwarts.jpg" alt="Tylypahka" class="kuva">
           </div>
           </div>
