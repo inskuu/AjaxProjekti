@@ -32,19 +32,6 @@ const kaannokset = {
     }
 }
 
-
-//Hae hahmon tiedot klikkaamalla nimeä
-document.querySelectorAll(".valikonsisalto").forEach(valikko => {
-  valikko.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    if (e.target.tagName === "A") {
-      const hahmonNimi = e.target.dataset.name;
-      haeHahmo(hahmonNimi); 
-    }
-  });
-});
-
 let hahmot = [];
 
 //Lataa kaikki hahmot
@@ -59,7 +46,7 @@ xmlhttp.onreadystatechange=function() {
 if (xmlhttp.readyState==4 &&
 xmlhttp.status==200) {
 
-//Parsitaan JSON ja tallennetaan hahmolista    
+//Parsitaan JSON ja tallennetaan hahmot taulukkoon ja lisätään alasvetovalikoihin.
     const tiedot = JSON.parse(xmlhttp.responseText);
     hahmot = tiedot;
     taytaValikot();
@@ -69,7 +56,19 @@ xmlhttp.status==200) {
 
 lataaHahmot();
 
-//Hae yksittäinen hahmo ja sen lisää sen tiedot hahmokortille
+//Hae hahmon tiedot klikkaamalla nimeä
+document.querySelectorAll(".valikonsisalto").forEach(valikko => {
+  valikko.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (e.target.tagName === "A") {
+      const hahmonNimi = e.target.dataset.name;
+      haeHahmo(hahmonNimi); 
+    }
+  });
+});
+
+//Hae yksittäinen hahmo ja lisää sen tiedot hahmokortille. Osa tiedoista suomennettu oman sanakirjan avulla.
     function haeHahmo(nimi) {
     const hahmo = hahmot.find(hahmo => hahmo.name === nimi);
     
@@ -92,7 +91,7 @@ lataaHahmot();
   <p>${kaannokset.patronus[hahmo.patronus]}</p>
 
    <h3>Status</h3>
-  <p>${hahmo.alive ? "Elossa" : "Kuollut"}</p>
+  <p>${hahmo.alive ? "Elossa" : "Kuollut"}</p> 
 
   <h3>Näyttelijä</h3>
   <p>${hahmo.actor}</p>
@@ -103,7 +102,7 @@ lataaHahmot();
 `;
 }
 
-//Lisää kuvalliset hahmot oikeisiin alasvetovalikkoihin
+//Lisää kuvalliset hahmot oikeisiin alasvetovalikoihin
 function taytaValikot() {
     const opiskelijat = hahmot.filter(h => h.hogwartsStudent && h.image);
     const opettajat = hahmot.filter(h => h.hogwartsStaff  && h.image);
@@ -139,7 +138,7 @@ function taytaValikot() {
   });
 }
 
-//Etsi hakukentästä tuvan nimellä tai sen osalla
+//Etsi hakukentästä suomenkielisellä tuvan nimellä tai sen osalla.
 function haeTupa(tupa) {
 const tulokset = hahmot.filter(hahmo => kaannokset.house[hahmo.house] && kaannokset.house[hahmo.house].toLowerCase().includes(tupa));
 
@@ -147,7 +146,7 @@ const tulokset = hahmot.filter(hahmo => kaannokset.house[hahmo.house] && kaannok
 const hakutulokset = document.querySelector("#hakuTulokset");
 hakutulokset.innerHTML = "";
 
-
+//Lisää virhe, jos hakusana väärin eikä tästä syystä tuota tulosta.
     if (tulokset.length === 0) {
         hakutulokset.innerHTML = "<h1 class = 'virhe'>Ei hakutuloksia</h1>";
         return;
@@ -159,7 +158,7 @@ hakutulokset.innerHTML = "";
         <h1>${kaannokset.house[houseName]}</h1>
         <hr>`;
 
-//Lisää hahmot listaan
+//Lisää hahmot listaan. Lisää tieto onko hahmo oppilas/opettaja/muu.
   tulokset.forEach(h => {
     const div = document.createElement("div");
     div.innerHTML = `
@@ -180,20 +179,21 @@ hakunappi.addEventListener("submit", function(e) {
     e.preventDefault();
 const sana = hakukentta.value.trim().toLowerCase();
 
-//Lisää virhe, jos tyhjä haku tai väärä hakusana
+//Lisää virhe, jos tyhjä haku.
 if (sana === "") {
   hakukentta.placeholder = "Yritä uudestaan";
   hakukentta.classList.add("virhe");
   return; 
 }
 
+//Suorita haku, poista virhe ja palauta hakukenttä ennalleen.
 hakukentta.classList.remove("virhe");
 hakukentta.placeholder = alkuperainenPlaceholder;
 haeTupa(sana);
 hakukentta.value ="";
 });
 
-//Palauta hakukenttä ennalleen, kun aloitetaan uusi haku
+//Palauta hakukenttä ennalleen, kun aloitetaan uusi haku.
 hakukentta.addEventListener("input", function () {
     hakukentta.classList.remove("virhe");
     hakukentta.placeholder = alkuperainenPlaceholder;
